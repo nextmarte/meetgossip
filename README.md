@@ -1,0 +1,1 @@
+Projeto de transcrição de audios em texto utilizando a API do Google Speech-to-Text e google gemini para sumarização de texto.
