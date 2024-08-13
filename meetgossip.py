@@ -37,7 +37,7 @@ def process_audio(file):
     return transcriptions
 
 
-st.title("MeetGossip - transcritor de áudio .m4a para texto")
+st.title("MeetGossip - audio .m4a para texto")
 st.write("Faça upload de um arquivo de áudio em formato .m4a para transcrição.")
 
 uploaded_file = st.file_uploader("Escolha um arquivo de áudio", type="m4a")
