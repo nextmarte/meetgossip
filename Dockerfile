@@ -1,6 +1,9 @@
 # Use uma imagem base do Python
 FROM python:3.10-slim
 
+# Instale ffmpeg
+RUN apt-get update && apt-get install -y ffmpeg
+
 # Defina o diretório de trabalho
 WORKDIR /app
 
