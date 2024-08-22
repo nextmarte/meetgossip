@@ -60,6 +60,8 @@ def process_audio(file, file_type):
                 video.audio.write_audiofile(temp_audio_file.name)
                 temp_audio_path = temp_audio_file.name
             audio = AudioSegment.from_file(temp_audio_path, format="mp3")
+        elif file_type == "mp3":
+            audio = AudioSegment.from_file(file, format="mp3")
         else:
             raise ValueError("Formato de arquivo não suportado")
 
@@ -94,10 +96,8 @@ def clean_text(text):
 
 def summarize_meeting(transcription_text):
     try:
-
         # Limpar o texto de transcrição
         clean_transcription_text = clean_text(transcription_text)
-
 
         response = model.generate_content(f"Resuma este texto detalhadamente: {clean_transcription_text}")
 
@@ -107,18 +107,18 @@ def summarize_meeting(transcription_text):
         return None
 
 st.title("MeetGossip - áudio para texto")
-st.write("Faça upload de um arquivo de áudio em formato .m4a ou .mp4 para transcrição.")
+st.write("Faça upload de um arquivo de áudio em formato .m4a, .mp4 ou .mp3 para transcrição.")
 
-uploaded_file = st.file_uploader("Escolha um arquivo de áudio", type=["m4a", "mp4"])
+uploaded_file = st.file_uploader("Escolha um arquivo de áudio", type=["m4a", "mp4", "mp3"])
 
 transcricao_texto = None  # Inicializa a variável fora do bloco if
 
 if uploaded_file is not None:
     file_name = uploaded_file.name
-    st.audio(uploaded_file, format='audio/m4a' if file_name.endswith('.m4a') else 'audio/mp4')
+    st.audio(uploaded_file, format='audio/m4a' if file_name.endswith('.m4a') else 'audio/mp4' if file_name.endswith('.mp4') else 'audio/mp3')
     if st.button("Iniciar Transcrição"):
         with st.spinner('Transcrevendo...'):
-            file_type = "m4a" if file_name.endswith('.m4a') else "mp4"
+            file_type = "m4a" if file_name.endswith('.m4a') else "mp4" if file_name.endswith('.mp4') else "mp3"
             transcriptions = process_audio(uploaded_file, file_type)
             st.success('Transcrição concluída!')
             transcricao_texto = " ".join(transcriptions)
