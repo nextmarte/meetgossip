@@ -106,7 +106,7 @@ def summarize_meeting(transcription_text):
         st.error(f"Erro ao gerar sumarização: {e}")
         return None
 
-st.title("MeetGossip - áudio para texto")
+st.title("CID@MeetGossip - áudio para texto")
 st.write("Faça upload de um arquivo de áudio em formato .m4a, .mp4 ou .mp3 para transcrição.")
 
 uploaded_file = st.file_uploader("Escolha um arquivo de áudio", type=["m4a", "mp4", "mp3"])
