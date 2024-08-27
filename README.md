@@ -17,3 +17,8 @@ streamlit run meetgossip.py
 a porta padrão é 8501
 
 ex: ultron.local:8501
+
+
+docker-compose down --rmi all --volumes --remove-orphans
+docker system prune -a
+docker-compose up --build
